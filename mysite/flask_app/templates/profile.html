@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}プロフィール{% endblock %}
+
+{% block content %}
+<h2>{{ profile_user.name }} のプロフィール</h2>
+<p>地域: {{ profile_user.region }}</p>
+<p>子どもの年齢: {{ profile_user.child_age }}</p>
+<p>自己紹介: {{ profile_user.bio }}</p>
+
+<p>
+  フォロワー: {{ profile_user.followers.count() }} |
+  フォロー中: {{ profile_user.following.count() }}
+</p>
+
+{% if current_user.id != profile_user.id %}
+  <a href="{{ url_for('dm_chat', other_user_id=profile_user.id) }}" class="btn btn-primary">
+    DMを送る
+  </a>
+
+  {% if profile_user.id in following_ids %}
+    <form action="{{ url_for('unfollow', user_id=profile_user.id) }}" method="POST" style="display:inline;">
+      <button class="btn btn-secondary">フォロー解除</button>
+    </form>
+  {% else %}
+    <form action="{{ url_for('follow', user_id=profile_user.id) }}" method="POST" style="display:inline;">
+      <button class="btn btn-primary">フォローする</button>
+    </form>
+  {% endif %}
+{% endif %}
+
+<h3 class="mt-4">投稿</h3>
+{% for post in profile_posts %}
+  <div class="card mb-2 p-2">
+    <p>{{ post.content }}</p>
+    <small>{{ post.created_at }}</small>
+  </div>
+{% endfor %}
+{% endblock %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url_for('home') }}">ホーム</a>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('profile', user_id=current_user.id) }}">
+            プロフィール
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('logout') }}">ログアウト</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

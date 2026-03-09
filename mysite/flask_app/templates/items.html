@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>子育てグッズ情報</h2>
+
+<ul class="list-group">
+    {% for item in items %}
+        <li class="list-group-item">
+            <strong>{{ item.name }}</strong> - {{ item.store }}<br>
+            {{ item.description }}<br>
+            価格: {{ item.price }}円
+            {% if item.url %}
+                <a href="{{ item.url }}" target="_blank">購入はこちら</a>
+            {% endif %}
+        </li>
+    {% else %}
+        <li class="list-group-item">まだ登録されていません</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>DM一覧</h2>
+
+{% for user_id, dm in rooms.items() %}
+    <div>
+        <a href="{{ url_for('dm_chat', other_user_id=user_id) }}">
+            ユーザー{{ user_id }}
+        </a>
+    </div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}登録{% endblock %}
+
+{% block content %}
+
+<h1>ユーザー登録</h1>
+
+<form method="POST">
+
+  <input type="text" name="name" placeholder="名前" required>
+
+  
+  <input type="password" name="password" placeholder="パスワード" required>
+
+  <button type="submit">登録</button>
+
+  <input type="text" name="region" placeholder="地域" class="form-control mb-2">
+
+<input type="number" name="child_age" placeholder="子どもの年齢" class="form-control mb-2">
+
+<textarea name="bio" placeholder="自己紹介" class="form-control mb-2"></textarea>
+
+</form>
+
+<a href="/">戻る</a>
+
+
+
+{% endblock %}

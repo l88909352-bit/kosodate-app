@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My SNS{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">My SNS</a>
+
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+
+        {% if session.get("user_id") %}
+          <li class="nav-item">
+            <a class="nav-link" href="/">ホーム</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/dm_rooms">DMルーム</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/my_profile">マイプロフィール</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/items">子育てグッズ</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/support">地域支援情報</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">ログアウト</a>
+          </li>
+
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="/login">ログイン</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">新規登録</a>
+          </li>
+        {% endif %}
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+    {% block content %}{% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

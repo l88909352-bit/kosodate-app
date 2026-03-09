@@ -1,0 +1,26 @@
+{% for user in users %}
+    {% if user.id != current_user_id %}
+        <div style="margin-bottom: 10px;">
+            {{ user.name }}
+
+            {% if user.id in following_ids %}
+                <form action="/unfollow/{{ user.id }}" method="POST" style="display:inline;">
+                    <button type="submit">フォロー中（解除）</button>
+                </form>
+            {% else %}
+                <form action="/follow/{{ user.id }}" method="POST" style="display:inline;">
+                    <button type="submit">フォローする</button>
+                </form>
+            {% endif %}
+        </div>
+    {% endif %}
+
+{% for u in users %}
+  <div>
+    <strong>{{ u.name }}</strong>
+    <a href="{{ url_for('dm_chat', other_user_id=u.id) }}" class="btn btn-sm btn-secondary">
+      DM
+    </a>
+  </div>
+{% endfor %}
+{% endfor %}

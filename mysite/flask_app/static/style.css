@@ -1,0 +1,178 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 40px;
+}
+
+h1 {
+    color: #333;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+a {
+    text-decoration: none;
+    color: #4f9bec;
+    margin-right: 10px;
+}
+
+button {
+    background: #ca2f3f;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* ===== ダークモード ===== */
+body.dark {
+    background: #242323a1;
+    color: #e8dbdb;
+}
+
+body.dark li {
+    background: #686868cb;
+    box-shadow: none;
+}
+
+body.dark a {
+    color: #81c0f3;
+}
+
+body.dark button {
+    background: #a12c38;
+}
+
+body.dark input {
+    background: #2a2a2a;
+    color: #fff;
+    border: 1px solid #555;
+}
+/* 右上固定ボタン */
+.dark-toggle {
+    position: fixed;
+    top: 90px;   /* ← ナビバーより下に */
+    right: 20px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    background: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+
+.dark-toggle:hover {
+    opacity: 0.8;
+}
+body.dark .dark-toggle {
+    background: #ffffff;
+    color: #121212;
+}
+
+body.dark h1 {
+    color: #e9e9e9;
+}
+/* ===== ナビバー ===== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 999;
+}
+
+.navbar a {
+    margin-left: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.container {
+    margin-top: 80px;
+}
+
+/* ダーク用 */
+body.dark .navbar {
+    background: #1e1e1e;
+}
+
+body.dark .navbar a {
+    color: #e0e0e0;
+}
+
+/* ===== スマホ対応 ===== */
+@media (max-width: 600px) {
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px 20px;
+    }
+
+    .nav-right {
+        margin-top: 10px;
+    }
+
+    .nav-right a {
+        display: block;
+        margin: 5px 0;
+    }
+
+    .container {
+        padding: 10px;
+        margin-top: 120px;
+    }
+
+    li {
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+.sort-links a {
+    margin-right: 15px;
+    font-weight: bold;
+}

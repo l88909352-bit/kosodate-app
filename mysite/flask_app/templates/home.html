@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}ホーム{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">ようこそ {{ user.name }} さん</h2>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <form action="/post" method="POST" class="d-flex gap-2">
+      <input type="text" name="content" class="form-control" placeholder="今なにしてる？" required>
+      <button class="btn btn-primary">投稿</button>
+    </form>
+  </div>
+</div>
+
+<div class="mb-3">
+  <a href="/" class="btn btn-outline-primary btn-sm">フォロー中</a>
+  <a href="/?all=1" class="btn btn-outline-secondary btn-sm">全投稿</a>
+</div>
+
+
+{% for post in posts %}
+  <div class="card mb-3 p-3">
+
+  <strong>
+  <a href="{{ url_for('profile', user_id=post.user.id) }}">
+    {{ post.user.name }}
+  </a>
+  <a href="{{ url_for('dm_chat', other_user_id=post.user.id) }}" class="btn btn-sm btn-outline-primary ms-2">
+    DM
+  </a>
+  </strong>
+
+    <p>{{ post.content }}</p>
+
+    <hr>
+
+<!-- コメント表示 -->
+{% for comment in post.comments %}
+  <div class="mb-1">
+    <small>
+      <strong>{{ comment.user.name }}</strong> :
+      {{ comment.content }}
+
+      {% if comment.user_id == user.id %}
+        <a href="/delete_comment/{{ comment.id }}"
+           class="text-danger ms-2">削除</a>
+      {% endif %}
+    </small>
+  </div>
+{% endfor %}
+
+<!-- コメントフォーム -->
+<form action="/comment/{{ post.id }}" method="POST" class="mt-2 d-flex gap-2">
+  <input type="text"
+         name="content"
+         class="form-control form-control-sm"
+         placeholder="コメントする"
+         required>
+  <button class="btn btn-sm btn-secondary">送信</button>
+</form>
+
+
+    <a href="/like/{{ post.id }}"
+   class="btn btn-sm
+   {% if post.id in liked_post_ids %}
+       btn-primary
+   {% else %}
+       btn-outline-primary
+   {% endif %}">
+   👍 いいね
+</a>
+
+    <span>
+        {{ post.likes|length if post.likes else 0 }} いいね
+    </span>
+
+    {% if post.user_id == user.id %}
+      <a href="/delete_post/{{ post.id }}" class="btn btn-sm btn-danger">
+        削除
+      </a>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+
+
+
+{% endblock %}
+
+

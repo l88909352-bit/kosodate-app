@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-idjk$=i4b_r4pm&y@2_6^enj&*avp5st&+cb+jy%diwhcnux5&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False 
 
 ALLOWED_HOSTS = ["kosodate-app.onrender.com", "localhost", "127.0.0.1"]
 

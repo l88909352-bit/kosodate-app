@@ -171,6 +171,7 @@ def home():
         liked_post_ids=liked_post_ids
     )
 
+
 @app.route("/users")
 def users():
     if "user_id" not in session:

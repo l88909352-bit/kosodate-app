@@ -23,6 +23,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
+
 migrate = Migrate(app, db)
 
 # -------------------
@@ -503,9 +504,10 @@ def support_list():
     return render_template("support.html", supports=supports)
 
 
-if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
+# ルート（@app.route）などが終わって...
 
+with app.app_context():
+    db.create_all()
+
+if __name__ == "__main__":
     socketio.run(app, host="0.0.0.0", port=5000, debug=True)
-    
